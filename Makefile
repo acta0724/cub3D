@@ -1,0 +1,55 @@
+NAME		:= cub3D
+LIBFT_DIR	:= ./libft
+LIBFT		:= $(LIBFT_DIR)/libft.a
+MLX_DIR		:= ./minilibx
+MLX_LIB		:= $(MLX_DIR)/libmlx.a
+INCS_DIR	:= ./include
+SRCS_DIR	:= ./src
+OBJS_DIR	:= ./objs
+
+CC			:= cc
+CCFLAGS		:= -Wall -Wextra -Werror -I $(INCS_DIR) -I $(MLX_DIR) -I $(LIBFT_DIR) -g
+# LDFLAGS		:= -lm -L/usr/X11/lib -lX11 -lXext
+# macOS specific flags
+LDFLAGS		:= -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+MLXFLAGS	:= -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+
+SRCS		:= $(SRCS_DIR)/main.c \
+			   $(SRCS_DIR)/control/input.c \
+			   $(SRCS_DIR)/parse/check_file_extension.c \
+			   $(SRCS_DIR)/parse/init_game.c \
+			   $(SRCS_DIR)/parse/load_map.c \
+			   $(SRCS_DIR)/parse/map_check.c \
+			   $(SRCS_DIR)/util/error_exit.c \
+			   $(SRCS_DIR)/util/free_game.c \
+			   $(SRCS_DIR)/util/get_next_line.c
+
+# Use the full path structure for object files to avoid name conflicts
+OBJS		:= $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS))
+
+all: $(NAME)
+
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
+
+$(MLX_LIB):
+	$(MAKE) -C $(MLX_DIR)
+
+$(NAME): $(OBJS) $(LIBFT) $(MLX_LIB)
+	$(CC) $(CCFLAGS) -o $@ $^ $(LDFLAGS)
+
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CCFLAGS) -c $< -o $@
+
+clean:
+	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(MLX_DIR) clean
+	rm -rf $(OBJS_DIR)
+
+fclean: clean
+	rm -f $(NAME) $(LIBFT) $(MLX_LIB)
+
+re: fclean all
+
+.PHONY: all clean fclean re
