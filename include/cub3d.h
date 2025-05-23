@@ -27,12 +27,18 @@
 # define EAST 'E'
 # define WEST 'W'
 
-# define ERR_ARGS "Error\nInvalid arguments. Usage: ./so_long <map.ber>"
-# define ERR_EXTENSION "Error\nFile must have .ber extension"
+# define WINDOW_WIDTH 800
+# define WINDOW_HEIGHT 600
+
+# define ERR_ARGS "Error\nInvalid arguments. Usage: ./cub3D <map.cub>"
+# define ERR_EXTENSION "Error\nFile must have .cub extension"
 # define ERR_MLX "Error\nMLX initialization failed"
 # define ERR_MAP "Error\nInvalid map"
 # define ERR_FILE "Error\nCannot open map file"
 # define ERR_CHARS "Error\nInvalid characters in map"
 # define ERR_PLAYER "Error\nInvalid player position in map"
+# define ERR_MEM "Error\nMemory allocation failed"
+# define ERR_MAP_BOUNDARY "Error\nMap is not properly closed: Empty space or player near a boundary"
+# define ERR_MAP_LEAK "Error\nMap is not closed: Found a leak in the map"
 
 #endif

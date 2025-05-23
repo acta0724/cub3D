@@ -1,31 +1,105 @@
 #include "../../include/cub3d.h"
 
+// マップのセルサイズ（ピクセル単位）
+#define CELL_SIZE 20
+
+// マップのセルを描画する関数
+void draw_cell(t_game *game, int x, int y, int color)
+{
+	int i, j;
+	int start_x = x * CELL_SIZE;
+	int start_y = y * CELL_SIZE;
+	
+	for (i = 0; i < CELL_SIZE; i++)
+	{
+		for (j = 0; j < CELL_SIZE; j++)
+		{
+			mlx_pixel_put(game->mlx, game->win, start_x + j, start_y + i, color);
+		}
+	}
+}
+
+// プレイヤーを描画する関数
+void draw_player(t_game *game, int x, int y, int color)
+{
+	int i, j;
+	int start_x = x * CELL_SIZE + CELL_SIZE / 4;
+	int start_y = y * CELL_SIZE + CELL_SIZE / 4;
+	int size = CELL_SIZE / 2;
+	
+	for (i = 0; i < size; i++)
+	{
+		for (j = 0; j < size; j++)
+		{
+			mlx_pixel_put(game->mlx, game->win, start_x + j, start_y + i, color);
+		}
+	}
+}
+
+void draw_map(t_game *game)
+{
+	int x, y;
+	
+	for (y = 0; y < WINDOW_HEIGHT; y++)
+	{
+		for (x = 0; x < WINDOW_WIDTH; x++)
+		{
+			mlx_pixel_put(game->mlx, game->win, x, y, 0x000000);
+		}
+	}
+	
+	for (y = 0; y < game->height; y++)
+	{
+		for (x = 0; x < (int)ft_strlen(game->map[y]); x++)
+		{
+			if (game->map[y][x] == WALL)
+				draw_cell(game, x, y, 0xFFFFFF);
+			else if (game->map[y][x] == EMPTY)
+				draw_cell(game, x, y, 0x444444);
+		}
+	}
+	draw_player(game, game->player_x, game->player_y, 0xFF0000);
+}
+
 int load_images(t_game *game)
 {
-	game->img->north = mlx_xpm_file_to_image(game->mlx, "textures/north.xpm", &game->width, &game->height);
-	game->img->south = mlx_xpm_file_to_image(game->mlx, "textures/south.xpm", &game->width, &game->height);
-	game->img->east = mlx_xpm_file_to_image(game->mlx, "textures/east.xpm", &game->width, &game->height);
-	game->img->west = mlx_xpm_file_to_image(game->mlx, "textures/west.xpm", &game->width, &game->height);
+	int img_width;
+	int img_height;
+	
+	// Allocate memory for image structure
+	game->img = (t_img *)malloc(sizeof(t_img));
+	if (!game->img)
+		return (0);
+	
+	// Use texture paths from the map file
+	game->img->north = mlx_xpm_file_to_image(game->mlx, game->north_texture, &img_width, &img_height);
+	game->img->south = mlx_xpm_file_to_image(game->mlx, game->south_texture, &img_width, &img_height);
+	game->img->west = mlx_xpm_file_to_image(game->mlx, game->west_texture, &img_width, &img_height);
+	game->img->east = mlx_xpm_file_to_image(game->mlx, game->east_texture, &img_width, &img_height);
+	
 	if (!game->img->north || !game->img->south || !game->img->east || !game->img->west)
 	{
 		free_game(game);
 		return (0);
 	}
+	
 	return (1);
+}
+
+int render_loop(t_game *game)
+{
+	draw_map(game);
+	
+	return (0);
 }
 
 void init_game(t_game *game, const char *filename)
 {
-	ft_memset(game, 0, sizeof(t_game));
+	(void)filename;
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		error_exit(ERR_MLX);
-	if (!parse_map(game, filename))
-	{
-		free_game(game);
-		error_exit(ERR_MAP);
-	}
-	game->win = mlx_new_window(game->mlx, game->width * 32, game->height * 32, "Cub3D");
+	game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D");
 	if (!game->win)
 	{
 		free_game(game);
@@ -36,4 +110,6 @@ void init_game(t_game *game, const char *filename)
 		free_game(game);
 		error_exit(ERR_MLX);
 	}
+	draw_map(game);
+	mlx_loop_hook(game->mlx, render_loop, game);
 }

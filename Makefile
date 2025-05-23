@@ -16,13 +16,20 @@ MLXFLAGS	:= -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 SRCS		:= $(SRCS_DIR)/main.c \
 			   $(SRCS_DIR)/control/input.c \
-			   $(SRCS_DIR)/parse/check_file_extension.c \
 			   $(SRCS_DIR)/parse/init_game.c \
 			   $(SRCS_DIR)/parse/load_map.c \
 			   $(SRCS_DIR)/parse/map_check.c \
+			   $(SRCS_DIR)/parse/color.c \
+			   $(SRCS_DIR)/parse/texture.c \
+			   $(SRCS_DIR)/parse/file_io.c \
+			   $(SRCS_DIR)/parse/ification.c \
+			   $(SRCS_DIR)/parse/map_builder.c \
+			   $(SRCS_DIR)/parse/config.c \
+			   $(SRCS_DIR)/util/debug.c \
 			   $(SRCS_DIR)/util/error_exit.c \
 			   $(SRCS_DIR)/util/free_game.c \
 			   $(SRCS_DIR)/util/get_next_line.c
+
 
 # Use the full path structure for object files to avoid name conflicts
 OBJS		:= $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS))

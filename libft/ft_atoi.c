@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kiwasa <kiwasa@student.42.jp>              +#+  +:+       +#+        */
+/*   By: iwasakatsuya <iwasakatsuya@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:07:33 by kiwasa            #+#    #+#             */
-/*   Updated: 2024/10/27 17:01:10 by kiwasa           ###   ########.fr       */
+/*   Updated: 2025/05/23 20:29:37 by iwasakatsuy      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,3 @@ int	ft_atoi(const char *str)
 	}
 	return ((int)(result * sign));
 }
-
-// #include <stdio.h>
-// #include <stdlib.h>
-
-// int main(void)
-// {
-// 	char str[100] = "+123";
-// 	printf("%d\n", ft_atoi(str));
-// 	printf("%d\n", atoi(str));
-// 	char str2[100] = "   123";
-// 	printf("%d\n", ft_atoi(str2));
-// 	printf("%d\n", atoi(str2));
-// 	char str3[100] = "-123";
-// 	printf("%d\n", ft_atoi(str3));
-// 	printf("%d\n", atoi(str3));
-// 	char str4[100] = "123afda";
-// 	printf("%d\n", ft_atoi(str4));
-// 	printf("%d\n", atoi(str4));
-// 	return (0);
-// }
