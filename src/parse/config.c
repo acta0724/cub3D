@@ -1,11 +1,14 @@
 #include "../../include/cub3d.h"
 
-void init_game_textures(t_game *game)
+void init_game_data(t_game *game)
 {
 	game->north_texture = NULL;
 	game->south_texture = NULL;
 	game->west_texture = NULL;
 	game->east_texture = NULL;
+	game->map = NULL;
+	game->width = -1;
+	game->height = -1;
 	game->floor_color.r = -1;
 	game->floor_color.g = -1;
 	game->floor_color.b = -1;
@@ -14,6 +17,9 @@ void init_game_textures(t_game *game)
 	game->ceiling_color.b = -1;
 	game->map_start_index = -1;
 	game->map_end_index = -1;
+	game->is_map_closed = true;
+	game->player_x = -1;
+	game->player_y = -1;
 	game->player_dir = '\0';
 }
 

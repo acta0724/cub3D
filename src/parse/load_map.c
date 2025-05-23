@@ -14,7 +14,7 @@ static bool parse_map(t_game *game, const char *filename)
 	char **all_lines;
 	int line_count;
 
-	init_game_textures(game);
+	init_game_data(game);
 	all_lines = read_all_lines(filename, &line_count);
 	if (!all_lines || line_count == 0)
 	{
@@ -49,20 +49,34 @@ static bool parse_map(t_game *game, const char *filename)
 static bool validate_map(t_game *game)
 {
 	if (!check_chars(game))
+	{
 		return (false);
+	}
 	if (!check_components(game))
+	{
 		return (false);
+	}
 	if (!check_map_closed(game))
+	{
 		return (false);
+	}
 	return (true);
 }
 
 void load_map(t_game *game, const char *filename)
 {
 	if (!check_file_extension(filename))
+	{
 		error_exit(ERR_EXTENSION);
+	}
 	if (!parse_map(game, filename))
+	{
+		free_init_resources(game);
 		error_exit(ERR_MAP);
+	}
 	if (!validate_map(game))
+	{
+		free_init_resources(game);
 		error_exit(ERR_MAP);
+	}
 }

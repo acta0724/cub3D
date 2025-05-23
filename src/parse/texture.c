@@ -15,25 +15,33 @@ static bool assign_texture_path(t_game *game, char *line, char *path)
 	if (ft_strncmp(line, "NO", 2) == 0)
 	{
 		if (game->north_texture)
-			free(game->north_texture);
+		{
+			return (false);
+		}
 		game->north_texture = path;
 	}
 	else if (ft_strncmp(line, "SO", 2) == 0)
 	{
 		if (game->south_texture)
-			free(game->south_texture);
+		{
+			return (false);
+		}
 		game->south_texture = path;
 	}
 	else if (ft_strncmp(line, "WE", 2) == 0)
 	{
 		if (game->west_texture)
-			free(game->west_texture);
+		{
+			return (false);
+		}
 		game->west_texture = path;
 	}
 	else if (ft_strncmp(line, "EA", 2) == 0)
 	{
 		if (game->east_texture)
-			free(game->east_texture);
+		{
+			return (false);
+		}
 		game->east_texture = path;
 	}
 	else
@@ -64,6 +72,9 @@ bool parse_texture(t_game *game, char *line)
 	if (!path)
 		return (false);
 	if (!assign_texture_path(game, line, path))
+	{
+		free(path);
 		return (false);
+	}
 	return (true);
 }

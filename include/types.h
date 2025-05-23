@@ -1,6 +1,8 @@
 #ifndef TYPES_H
 # define TYPES_H
 
+# include <stdbool.h>
+
 typedef struct s_color
 {
 	int	r;
@@ -41,6 +43,8 @@ typedef struct s_game
 	// Map indices
 	int		map_start_index;
 	int		map_end_index;
+	// Map validation flags
+	bool	is_map_closed;
 }	t_game;
 
 #endif

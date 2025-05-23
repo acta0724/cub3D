@@ -20,6 +20,13 @@ bool find_map_indices(char **all_lines, int line_count, t_game *game)
 			game->map_end_index = i;
 			map_started = true;
 		}
+		else if (!is_map_line(all_lines[i]) && (is_color_line(all_lines[i]) || is_texture_line(all_lines[i])))
+		{
+			if (map_started)
+				return (false);
+		}
+		else
+			return (false);
 		i++;
 	}
 	if (game->map_start_index != -1 && game->map_end_index != -1)
@@ -75,28 +82,26 @@ char *create_padded_line(char *src, int max_width)
 
 char **create_map(char **all_lines, t_game *game)
 {
-	char **map_lines;
+	char **map;
 	int i;
-	int max_width;
 
-	max_width = find_max_width(all_lines, game);
-	game->width = max_width;
-	map_lines = (char **)malloc(sizeof(char *) * (game->height + 1));
-	if (!map_lines)
+	game->width = find_max_width(all_lines, game);
+	map = (char **)malloc(sizeof(char *) * (game->height + 1));
+	if (!map)
 		return (NULL);
 	i = 0;
 	while (i < game->height)
 	{
-		map_lines[i] = create_padded_line(all_lines[game->map_start_index + i], max_width);
-		if (!map_lines[i])
+		map[i] = create_padded_line(all_lines[game->map_start_index + i], game->width);
+		if (!map[i])
 		{
-			free_all_lines(map_lines, i);
+			free_all_lines(map, i);
 			return (NULL);
 		}
 		i++;
 	}
-	map_lines[game->height] = NULL;
-	return (map_lines);
+	map[game->height] = NULL;
+	return (map);
 }
 
 bool find_player(t_game *game)

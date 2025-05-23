@@ -1,9 +1,7 @@
 #include "../../include/cub3d.h"
 
-// マップのセルサイズ（ピクセル単位）
 #define CELL_SIZE 20
 
-// マップのセルを描画する関数
 void draw_cell(t_game *game, int x, int y, int color)
 {
 	int i, j;
@@ -19,7 +17,6 @@ void draw_cell(t_game *game, int x, int y, int color)
 	}
 }
 
-// プレイヤーを描画する関数
 void draw_player(t_game *game, int x, int y, int color)
 {
 	int i, j;
@@ -47,7 +44,6 @@ void draw_map(t_game *game)
 			mlx_pixel_put(game->mlx, game->win, x, y, 0x000000);
 		}
 	}
-	
 	for (y = 0; y < game->height; y++)
 	{
 		for (x = 0; x < (int)ft_strlen(game->map[y]); x++)
@@ -61,35 +57,28 @@ void draw_map(t_game *game)
 	draw_player(game, game->player_x, game->player_y, 0xFF0000);
 }
 
-int load_images(t_game *game)
+bool load_images(t_game *game)
 {
 	int img_width;
 	int img_height;
 	
-	// Allocate memory for image structure
 	game->img = (t_img *)malloc(sizeof(t_img));
 	if (!game->img)
-		return (0);
-	
-	// Use texture paths from the map file
+		return (false);
 	game->img->north = mlx_xpm_file_to_image(game->mlx, game->north_texture, &img_width, &img_height);
 	game->img->south = mlx_xpm_file_to_image(game->mlx, game->south_texture, &img_width, &img_height);
 	game->img->west = mlx_xpm_file_to_image(game->mlx, game->west_texture, &img_width, &img_height);
 	game->img->east = mlx_xpm_file_to_image(game->mlx, game->east_texture, &img_width, &img_height);
-	
 	if (!game->img->north || !game->img->south || !game->img->east || !game->img->west)
 	{
-		free_game(game);
-		return (0);
+		return (false);
 	}
-	
-	return (1);
+	return (true);
 }
 
 int render_loop(t_game *game)
 {
 	draw_map(game);
-	
 	return (0);
 }
 
@@ -110,6 +99,6 @@ void init_game(t_game *game, const char *filename)
 		free_game(game);
 		error_exit(ERR_MLX);
 	}
-	draw_map(game);
-	mlx_loop_hook(game->mlx, render_loop, game);
+	// draw_map(game);
+	// mlx_loop_hook(game->mlx, render_loop, game);
 }

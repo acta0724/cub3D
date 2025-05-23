@@ -26,8 +26,10 @@ SRCS		:= $(SRCS_DIR)/main.c \
 			   $(SRCS_DIR)/parse/map_builder.c \
 			   $(SRCS_DIR)/parse/config.c \
 			   $(SRCS_DIR)/util/debug.c \
+			   $(SRCS_DIR)/util/debug_display_textures.c \
 			   $(SRCS_DIR)/util/error_exit.c \
 			   $(SRCS_DIR)/util/free_game.c \
+			   $(SRCS_DIR)/util/free_init_resources.c \
 			   $(SRCS_DIR)/util/get_next_line.c
 
 

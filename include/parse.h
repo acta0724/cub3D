@@ -4,8 +4,11 @@
 # include "types.h"
 # include <stdbool.h>
 
-int		load_images(t_game *game);
+// init_game.c
+bool	load_images(t_game *game);
 void	init_game(t_game *game, const char *filename);
+
+// map_check.c
 bool	check_chars(t_game *game);
 bool	check_components(t_game *game);
 bool	check_map_closed(t_game *game);
@@ -23,7 +26,7 @@ bool	is_color_line(const char *line);
 bool	is_map_line(const char *line);
 
 // config.c
-void	init_game_textures(t_game *game);
+void	init_game_data(t_game *game);
 bool	parse_config_lines(t_game *game, char **all_lines, int line_count);
 
 // map_builder.c
