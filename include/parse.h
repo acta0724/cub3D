@@ -17,7 +17,7 @@ void	load_map(t_game *game, const char *filename);
 char	**read_all_lines(const char *filename, int *line_count);
 void	free_all_lines(char **all_lines, int line_count);
 
-// ification.c
+// classification.c
 bool	is_texture_line(const char *line);
 bool	is_color_line(const char *line);
 bool	is_map_line(const char *line);

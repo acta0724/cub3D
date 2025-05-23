@@ -22,7 +22,7 @@ SRCS		:= $(SRCS_DIR)/main.c \
 			   $(SRCS_DIR)/parse/color.c \
 			   $(SRCS_DIR)/parse/texture.c \
 			   $(SRCS_DIR)/parse/file_io.c \
-			   $(SRCS_DIR)/parse/ification.c \
+			   $(SRCS_DIR)/parse/classification.c \
 			   $(SRCS_DIR)/parse/map_builder.c \
 			   $(SRCS_DIR)/parse/config.c \
 			   $(SRCS_DIR)/util/debug.c \
