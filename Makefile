@@ -25,6 +25,12 @@ SRCS		:= $(SRCS_DIR)/main.c \
 			   $(SRCS_DIR)/parse/classification.c \
 			   $(SRCS_DIR)/parse/map_builder.c \
 			   $(SRCS_DIR)/parse/config.c \
+			   $(SRCS_DIR)/render/raycast.c \
+			   $(SRCS_DIR)/render/init_render.c \
+			   $(SRCS_DIR)/render/texture.c \
+			   $(SRCS_DIR)/render/calc.c \
+			   $(SRCS_DIR)/render/draw.c \
+			   $(SRCS_DIR)/render/ray.c \
 			   $(SRCS_DIR)/util/debug.c \
 			   $(SRCS_DIR)/util/debug_display_textures.c \
 			   $(SRCS_DIR)/util/error_exit.c \

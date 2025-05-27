@@ -45,6 +45,15 @@ void	debug_game_data(t_game *game)
 	
 	// プレイヤー情報を表示
 	printf("\n=== プレイヤー情報 ===\n");
-	printf("位置: (%d, %d)\n", game->player_x, game->player_y);
-	printf("向き: %c\n", game->player_dir);
+	printf("マップ上の位置: (%d, %d)\n", game->player_x, game->player_y);
+	printf("初期向き: %c\n", game->player_dir);
+	
+	if (game->player)
+	{
+		printf("実際の位置: (%.2f, %.2f)\n", game->player->pos_x, game->player->pos_y);
+		printf("方向ベクトル: (%.2f, %.2f)\n", game->player->dir_x, game->player->dir_y);
+		printf("カメラ平面: (%.2f, %.2f)\n", game->player->plane_x, game->player->plane_y);
+		printf("移動速度: %.2f\n", game->player->move_speed);
+		printf("回転速度: %.2f\n", game->player->rot_speed);
+	}
 }

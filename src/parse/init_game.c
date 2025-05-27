@@ -4,55 +4,79 @@
 
 void draw_cell(t_game *game, int x, int y, int color)
 {
-	int i, j;
-	int start_x = x * CELL_SIZE;
-	int start_y = y * CELL_SIZE;
-	
-	for (i = 0; i < CELL_SIZE; i++)
+	int	i;
+	int	j;
+	int	start_x;
+	int	start_y;
+
+	start_x = x * CELL_SIZE;
+	start_y = y * CELL_SIZE;
+	i = 0;
+	while (i < CELL_SIZE)
 	{
-		for (j = 0; j < CELL_SIZE; j++)
+		j = 0;
+		while (j < CELL_SIZE)
 		{
 			mlx_pixel_put(game->mlx, game->win, start_x + j, start_y + i, color);
+			j++;
 		}
+		i++;
 	}
 }
 
 void draw_player(t_game *game, int x, int y, int color)
 {
-	int i, j;
-	int start_x = x * CELL_SIZE + CELL_SIZE / 4;
-	int start_y = y * CELL_SIZE + CELL_SIZE / 4;
-	int size = CELL_SIZE / 2;
+	int	i;
+	int	j;
+	int	start_x;
+	int	start_y;
+	int	size;
 	
-	for (i = 0; i < size; i++)
+	start_x = x * CELL_SIZE + CELL_SIZE / 4;
+	start_y = y * CELL_SIZE + CELL_SIZE / 4;
+	size = CELL_SIZE / 2;
+	i = 0;
+	while (i < size)
 	{
-		for (j = 0; j < size; j++)
+		j = 0;
+		while (j < size)
 		{
 			mlx_pixel_put(game->mlx, game->win, start_x + j, start_y + i, color);
+			j++;
 		}
+		i++;
 	}
 }
 
 void draw_map(t_game *game)
 {
-	int x, y;
+	int	x;
+	int	y;
 	
-	for (y = 0; y < WINDOW_HEIGHT; y++)
+	y = 0;
+	while (y < WINDOW_HEIGHT)
 	{
-		for (x = 0; x < WINDOW_WIDTH; x++)
+		x = 0;
+		while (x < WINDOW_WIDTH)
 		{
 			mlx_pixel_put(game->mlx, game->win, x, y, 0x000000);
+			x++;
 		}
+		y++;
 	}
-	for (y = 0; y < game->height; y++)
+	y = 0;
+	while (y < game->height)
 	{
-		for (x = 0; x < (int)ft_strlen(game->map[y]); x++)
+		x = 0;
+		while (x < (int)ft_strlen(game->map[y]))
 		{
 			if (game->map[y][x] == WALL)
 				draw_cell(game, x, y, 0xFFFFFF);
 			else if (game->map[y][x] == EMPTY)
 				draw_cell(game, x, y, 0x444444);
+			x++;
 		}
+		y++;
 	}
 	draw_player(game, game->player_x, game->player_y, 0xFF0000);
 }
@@ -73,13 +97,14 @@ bool load_images(t_game *game)
 	{
 		return (false);
 	}
+	game->img->width = img_width;
+	game->img->height = img_height;
 	return (true);
 }
 
 int render_loop(t_game *game)
 {
-	draw_map(game);
-	return (0);
+	return render_frame(game);
 }
 
 void init_game(t_game *game, const char *filename)
@@ -99,6 +124,6 @@ void init_game(t_game *game, const char *filename)
 		free_game(game);
 		error_exit(ERR_MLX);
 	}
-	// draw_map(game);
-	// mlx_loop_hook(game->mlx, render_loop, game);
+	init_raycasting(game);
+	mlx_loop_hook(game->mlx, render_loop, game);
 }
