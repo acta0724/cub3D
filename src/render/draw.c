@@ -3,9 +3,9 @@
 void	put_pixel(t_img *img, int x, int y, int color)
 {
 	char	*dst;
-	
+
 	if (x < 0 || y < 0 || x >= WINDOW_WIDTH || y >= WINDOW_HEIGHT)
-		return;
+		return ;
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	ft_memcpy(dst, &color, img->bits_per_pixel / 8);
 }
@@ -15,7 +15,7 @@ void	draw_wall(t_game *game, t_ray *ray, int x)
 	int		y;
 	int		color;
 	void	*tex_ptr;
-	
+
 	if (ray->tex_num == 0)
 		tex_ptr = game->img->north;
 	else if (ray->tex_num == 1)
@@ -43,9 +43,11 @@ void	draw_ceiling_floor(t_game *game)
 	int	y;
 	int	ceiling_color;
 	int	floor_color;
-	
-	ceiling_color = create_rgb(game->ceiling_color.r, game->ceiling_color.g, game->ceiling_color.b);
-	floor_color = create_rgb(game->floor_color.r, game->floor_color.g, game->floor_color.b);
+
+	ceiling_color = create_rgb(game->ceiling_color.r, game->ceiling_color.g,
+			game->ceiling_color.b);
+	floor_color = create_rgb(game->floor_color.r, game->floor_color.g,
+			game->floor_color.b);
 	y = 0;
 	while (y < WINDOW_HEIGHT)
 	{

@@ -9,7 +9,7 @@ void	raycasting(t_game *game)
 {
 	int		x;
 	t_ray	ray;
-	
+
 	draw_ceiling_floor(game);
 	x = 0;
 	while (x < WINDOW_WIDTH)

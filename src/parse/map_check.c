@@ -1,9 +1,9 @@
 #include "../../include/cub3d.h"
 
-char **copy_map(t_game *game)
+char	**copy_map(t_game *game)
 {
-	char **map_copy;
-	int i;
+	char	**map_copy;
+	int		i;
 
 	map_copy = (char **)malloc(sizeof(char *) * (game->height + 1));
 	if (!map_copy)
@@ -23,10 +23,10 @@ char **copy_map(t_game *game)
 	return (map_copy);
 }
 
-bool check_chars(t_game *game)
+bool	check_chars(t_game *game)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < game->height)
@@ -34,12 +34,9 @@ bool check_chars(t_game *game)
 		j = 0;
 		while (j < game->width)
 		{
-			if (game->map[i][j] != WALL \
-				&& game->map[i][j] != EMPTY \
-				&& game->map[i][j] != NORTH \
-				&& game->map[i][j] != EAST \
-				&& game->map[i][j] != SOUTH \
-				&& game->map[i][j] != WEST \
+			if (game->map[i][j] != WALL && game->map[i][j] != EMPTY
+				&& game->map[i][j] != NORTH && game->map[i][j] != EAST
+				&& game->map[i][j] != SOUTH && game->map[i][j] != WEST
 				&& game->map[i][j] != ' ')
 			{
 				free_game(game);
@@ -52,11 +49,11 @@ bool check_chars(t_game *game)
 	return (true);
 }
 
-bool check_components(t_game *game)
+bool	check_components(t_game *game)
 {
-	int i;
-	int j;
-	int player_count;
+	int	i;
+	int	j;
+	int	player_count;
 
 	player_count = 0;
 	i = 0;
@@ -65,7 +62,7 @@ bool check_components(t_game *game)
 		j = 0;
 		while (j < game->width)
 		{
-			if (game->map[i][j] == NORTH || game->map[i][j] == SOUTH \
+			if (game->map[i][j] == NORTH || game->map[i][j] == SOUTH
 				|| game->map[i][j] == EAST || game->map[i][j] == WEST)
 			{
 				player_count++;
@@ -79,19 +76,19 @@ bool check_components(t_game *game)
 	return (true);
 }
 
-static void flood_fill(t_game *game, char **visited, int x, int y)
+static void	flood_fill(t_game *game, char **visited, int x, int y)
 {
 	if (x < 0 || x >= game->width || y < 0 || y >= game->height)
 	{
 		game->is_map_closed = false;
-		return;
+		return ;
 	}
 	if (visited[y][x] == '1' || visited[y][x] == 'V')
-		return;
+		return ;
 	if (visited[y][x] == ' ')
 	{
 		game->is_map_closed = false;
-		return;
+		return ;
 	}
 	visited[y][x] = 'V';
 	flood_fill(game, visited, x + 1, y);
@@ -100,9 +97,9 @@ static void flood_fill(t_game *game, char **visited, int x, int y)
 	flood_fill(game, visited, x, y - 1);
 }
 
-bool check_map_closed(t_game *game)
+bool	check_map_closed(t_game *game)
 {
-	char **map_copy;
+	char	**map_copy;
 
 	map_copy = copy_map(game);
 	if (!map_copy)

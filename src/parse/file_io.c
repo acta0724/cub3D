@@ -1,12 +1,12 @@
 #include "../include/cub3d.h"
 
-char **read_all_lines(const char *filename, int *line_count)
+char	**read_all_lines(const char *filename, int *line_count)
 {
-	int fd;
-	char *line;
-	char **all_lines;
-	char **new_lines;
-	int i;
+	int		fd;
+	char	*line;
+	char	**all_lines;
+	char	**new_lines;
+	int		i;
 
 	*line_count = 0;
 	all_lines = NULL;
@@ -17,7 +17,7 @@ char **read_all_lines(const char *filename, int *line_count)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			break;
+			break ;
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		new_lines = (char **)malloc(sizeof(char *) * (*line_count + 2));
@@ -44,12 +44,12 @@ char **read_all_lines(const char *filename, int *line_count)
 	return (all_lines);
 }
 
-void free_all_lines(char **all_lines, int line_count)
+void	free_all_lines(char **all_lines, int line_count)
 {
-	int i;
+	int	i;
 
 	if (!all_lines)
-		return;
+		return ;
 	i = 0;
 	while (i < line_count)
 	{

@@ -1,20 +1,20 @@
 #include "../../include/cub3d.h"
 
-static void free_rgb_array(char **rgb)
+static void	free_rgb_array(char **rgb)
 {
-	int i;
+	int	i;
 
 	if (!rgb)
-		return;
+		return ;
 	i = 0;
 	while (rgb[i])
 		free(rgb[i++]);
 	free(rgb);
 }
 
-static bool check_isdigits(char *str)
+static bool	check_isdigits(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -26,11 +26,11 @@ static bool check_isdigits(char *str)
 	return (true);
 }
 
-static bool parse_rgb_values(char **rgb, t_game *game, char *line)
+static bool	parse_rgb_values(char **rgb, t_game *game, char *line)
 {
-	int r;
-	int g;
-	int b;
+	int	r;
+	int	g;
+	int	b;
 
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
@@ -52,10 +52,10 @@ static bool parse_rgb_values(char **rgb, t_game *game, char *line)
 	return (true);
 }
 
-bool parse_color(t_game *game, char *line)
+bool	parse_color(t_game *game, char *line)
 {
-	char **rgb;
-	char *color_str;
+	char	**rgb;
+	char	*color_str;
 
 	if (!line)
 		return (false);
@@ -63,8 +63,9 @@ bool parse_color(t_game *game, char *line)
 	if (*color_str == '\0')
 		return (false);
 	rgb = ft_split(color_str, ',');
-	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3] || \
-		!check_isdigits(rgb[0]) || !check_isdigits(rgb[1]) || !check_isdigits(rgb[2]))
+	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3]
+		|| !check_isdigits(rgb[0]) || !check_isdigits(rgb[1])
+		|| !check_isdigits(rgb[2]))
 	{
 		free_rgb_array(rgb);
 		return (false);

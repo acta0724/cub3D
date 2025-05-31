@@ -2,7 +2,7 @@
 
 #define CELL_SIZE 20
 
-void draw_cell(t_game *game, int x, int y, int color)
+void	draw_cell(t_game *game, int x, int y, int color)
 {
 	int	i;
 	int	j;
@@ -17,21 +17,22 @@ void draw_cell(t_game *game, int x, int y, int color)
 		j = 0;
 		while (j < CELL_SIZE)
 		{
-			mlx_pixel_put(game->mlx, game->win, start_x + j, start_y + i, color);
+			mlx_pixel_put(game->mlx, game->win, start_x + j, start_y + i,
+				color);
 			j++;
 		}
 		i++;
 	}
 }
 
-void draw_player(t_game *game, int x, int y, int color)
+void	draw_player(t_game *game, int x, int y, int color)
 {
 	int	i;
 	int	j;
 	int	start_x;
 	int	start_y;
 	int	size;
-	
+
 	start_x = x * CELL_SIZE + CELL_SIZE / 4;
 	start_y = y * CELL_SIZE + CELL_SIZE / 4;
 	size = CELL_SIZE / 2;
@@ -41,18 +42,19 @@ void draw_player(t_game *game, int x, int y, int color)
 		j = 0;
 		while (j < size)
 		{
-			mlx_pixel_put(game->mlx, game->win, start_x + j, start_y + i, color);
+			mlx_pixel_put(game->mlx, game->win, start_x + j, start_y + i,
+				color);
 			j++;
 		}
 		i++;
 	}
 }
 
-void draw_map(t_game *game)
+void	draw_map(t_game *game)
 {
 	int	x;
 	int	y;
-	
+
 	y = 0;
 	while (y < WINDOW_HEIGHT)
 	{
@@ -81,19 +83,24 @@ void draw_map(t_game *game)
 	draw_player(game, game->player_x, game->player_y, 0xFF0000);
 }
 
-bool load_images(t_game *game)
+bool	load_images(t_game *game)
 {
-	int img_width;
-	int img_height;
-	
+	int	img_width;
+	int	img_height;
+
 	game->img = (t_img *)malloc(sizeof(t_img));
 	if (!game->img)
 		return (false);
-	game->img->north = mlx_xpm_file_to_image(game->mlx, game->north_texture, &img_width, &img_height);
-	game->img->south = mlx_xpm_file_to_image(game->mlx, game->south_texture, &img_width, &img_height);
-	game->img->west = mlx_xpm_file_to_image(game->mlx, game->west_texture, &img_width, &img_height);
-	game->img->east = mlx_xpm_file_to_image(game->mlx, game->east_texture, &img_width, &img_height);
-	if (!game->img->north || !game->img->south || !game->img->east || !game->img->west)
+	game->img->north = mlx_xpm_file_to_image(game->mlx, game->north_texture,
+			&img_width, &img_height);
+	game->img->south = mlx_xpm_file_to_image(game->mlx, game->south_texture,
+			&img_width, &img_height);
+	game->img->west = mlx_xpm_file_to_image(game->mlx, game->west_texture,
+			&img_width, &img_height);
+	game->img->east = mlx_xpm_file_to_image(game->mlx, game->east_texture,
+			&img_width, &img_height);
+	if (!game->img->north || !game->img->south || !game->img->east
+		|| !game->img->west)
 	{
 		return (false);
 	}
@@ -102,12 +109,12 @@ bool load_images(t_game *game)
 	return (true);
 }
 
-int render_loop(t_game *game)
+int	render_loop(t_game *game)
 {
-	return render_frame(game);
+	return (render_frame(game));
 }
 
-void init_game(t_game *game, const char *filename)
+void	init_game(t_game *game, const char *filename)
 {
 	(void)filename;
 	game->mlx = mlx_init();
