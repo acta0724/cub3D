@@ -1,6 +1,6 @@
 #include "../../include/cub3d.h"
 
-void free_mlx_resources(t_game *game)
+void	free_mlx_resources(t_game *game)
 {
 	if (game->mlx)
 	{
@@ -18,7 +18,7 @@ void free_mlx_resources(t_game *game)
 	}
 }
 
-void free_game(t_game *game)
+void	free_game(t_game *game)
 {
 	free_init_resources(game);
 	free_mlx_resources(game);

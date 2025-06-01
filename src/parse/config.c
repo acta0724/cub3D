@@ -1,6 +1,6 @@
 #include "../../include/cub3d.h"
 
-void init_game_data(t_game *game)
+void	init_game_data(t_game *game)
 {
 	game->north_texture = NULL;
 	game->south_texture = NULL;
@@ -23,14 +23,15 @@ void init_game_data(t_game *game)
 	game->player_dir = '\0';
 }
 
-static bool parse_config_line(t_game *game, char *line, bool *textures_loaded, bool *colors_loaded)
+static bool	parse_config_line(t_game *game, char *line, bool *textures_loaded,
+		bool *colors_loaded)
 {
 	if (is_texture_line(line))
 	{
 		if (!parse_texture(game, line))
 			return (false);
-		if (game->north_texture && game->south_texture && 
-			game->west_texture && game->east_texture)
+		if (game->north_texture && game->south_texture && game->west_texture
+			&& game->east_texture)
 		{
 			*textures_loaded = true;
 		}
@@ -39,8 +40,9 @@ static bool parse_config_line(t_game *game, char *line, bool *textures_loaded, b
 	{
 		if (!parse_color(game, line))
 			return (false);
-		if (game->floor_color.r != -1 && game->floor_color.g != -1 && game->floor_color.b != -1 &&
-			game->ceiling_color.r != -1 && game->ceiling_color.g != -1 && game->ceiling_color.b != -1)
+		if (game->floor_color.r != -1 && game->floor_color.g != -1
+			&& game->floor_color.b != -1 && game->ceiling_color.r != -1
+			&& game->ceiling_color.g != -1 && game->ceiling_color.b != -1)
 		{
 			*colors_loaded = true;
 		}
@@ -48,11 +50,11 @@ static bool parse_config_line(t_game *game, char *line, bool *textures_loaded, b
 	return (true);
 }
 
-bool parse_config_lines(t_game *game, char **all_lines, int line_count)
+bool	parse_config_lines(t_game *game, char **all_lines, int line_count)
 {
-	int i;
-	bool textures_loaded;
-	bool colors_loaded;
+	int		i;
+	bool	textures_loaded;
+	bool	colors_loaded;
 
 	textures_loaded = false;
 	colors_loaded = false;
@@ -69,7 +71,8 @@ bool parse_config_lines(t_game *game, char **all_lines, int line_count)
 		}
 		else
 		{
-			if (!parse_config_line(game, all_lines[i], &textures_loaded, &colors_loaded))
+			if (!parse_config_line(game, all_lines[i], &textures_loaded,
+					&colors_loaded))
 				return (false);
 			i++;
 		}

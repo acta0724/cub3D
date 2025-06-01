@@ -1,9 +1,9 @@
 #include "../include/cub3d.h"
 
-bool is_map_line(const char *line)
+bool	is_map_line(const char *line)
 {
-	int i;
-	bool has_map_char;
+	int		i;
+	bool	has_map_char;
 
 	if (!line || line[0] == '\n' || line[0] == '\0')
 		return (false);
@@ -11,9 +11,8 @@ bool is_map_line(const char *line)
 	has_map_char = false;
 	while (line[i])
 	{
-		if (line[i] == '0' || line[i] == '1' || 
-			line[i] == 'N' || line[i] == 'S' || 
-			line[i] == 'W' || line[i] == 'E')
+		if (line[i] == '0' || line[i] == '1' || line[i] == 'N' || line[i] == 'S'
+			|| line[i] == 'W' || line[i] == 'E')
 		{
 			has_map_char = true;
 		}
@@ -26,17 +25,17 @@ bool is_map_line(const char *line)
 	return (has_map_char);
 }
 
-bool is_texture_line(const char *line)
+bool	is_texture_line(const char *line)
 {
 	if (!line)
 		return (false);
-	if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0 ||
-		ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0)
+	if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0
+		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0)
 		return (true);
 	return (false);
 }
 
-bool is_color_line(const char *line)
+bool	is_color_line(const char *line)
 {
 	if (!line)
 		return (false);

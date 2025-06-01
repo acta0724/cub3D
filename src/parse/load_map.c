@@ -1,18 +1,20 @@
 #include "../../include/cub3d.h"
 
-static bool check_file_extension(const char *filename)
+static bool	check_file_extension(const char *filename)
 {
-	char *dot;
+	char	*dot;
+
 	dot = ft_strrchr(filename, '.');
 	if (!dot || dot == filename)
 		return (false);
 	return (ft_strncmp(dot, ".cub", 5) == 0);
 }
 
-static bool parse_map(t_game *game, const char *filename)
+static bool	parse_map(t_game *game, const char *filename)
 {
-	char **all_lines;
-	int line_count;
+	char	**all_lines;
+	int		line_count;
+	bool	res;
 
 	init_game_data(game);
 	all_lines = read_all_lines(filename, &line_count);
@@ -46,7 +48,7 @@ static bool parse_map(t_game *game, const char *filename)
 	return (true);
 }
 
-static bool validate_map(t_game *game)
+static bool	validate_map(t_game *game)
 {
 	if (!check_chars(game))
 	{
@@ -63,7 +65,7 @@ static bool validate_map(t_game *game)
 	return (true);
 }
 
-void load_map(t_game *game, const char *filename)
+void	load_map(t_game *game, const char *filename)
 {
 	if (!check_file_extension(filename))
 	{

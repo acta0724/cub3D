@@ -1,6 +1,5 @@
-#include <stdlib.h>
-
 #include "../../include/cub3d.h"
+#include <stdlib.h>
 
 static char	*append_to_buffer(char *buffer, char *temp, int bytes_read)
 {

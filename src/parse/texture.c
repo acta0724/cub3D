@@ -1,8 +1,8 @@
 #include "../../include/cub3d.h"
 
-char *skip_space(char *str)
+char	*skip_space(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
@@ -10,7 +10,7 @@ char *skip_space(char *str)
 	return (&str[i]);
 }
 
-static bool assign_texture_path(t_game *game, char *line, char *path)
+static bool	assign_texture_path(t_game *game, char *line, char *path)
 {
 	if (ft_strncmp(line, "NO", 2) == 0)
 	{
@@ -52,11 +52,11 @@ static bool assign_texture_path(t_game *game, char *line, char *path)
 	return (true);
 }
 
-bool parse_texture(t_game *game, char *line)
+bool	parse_texture(t_game *game, char *line)
 {
-	char *path;
-	int i;
-	char *texture_path;
+	char	*path;
+	int		i;
+	char	*texture_path;
 
 	if (!line)
 		return (false);

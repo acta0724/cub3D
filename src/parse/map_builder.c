@@ -1,16 +1,18 @@
 #include "../../include/cub3d.h"
 
-bool find_map_indices(char **all_lines, int line_count, t_game *game)
+bool	find_map_indices(char **all_lines, int line_count, t_game *game)
 {
-	int i;
-	bool map_started = false;
+	int		i;
+	bool	map_started;
 
+	map_started = false;
 	i = 0;
 	while (i < line_count)
 	{
 		if (all_lines[i][0] == '\0')
 		{
-			if (map_started && i < line_count - 1 && is_map_line(all_lines[i+1]))
+			if (map_started && i < line_count - 1
+				&& is_map_line(all_lines[i + 1]))
 				return (false);
 		}
 		else if (is_map_line(all_lines[i]))
@@ -20,7 +22,8 @@ bool find_map_indices(char **all_lines, int line_count, t_game *game)
 			game->map_end_index = i;
 			map_started = true;
 		}
-		else if (!is_map_line(all_lines[i]) && (is_color_line(all_lines[i]) || is_texture_line(all_lines[i])))
+		else if (!is_map_line(all_lines[i]) && (is_color_line(all_lines[i])
+				|| is_texture_line(all_lines[i])))
 		{
 			if (map_started)
 				return (false);
@@ -37,11 +40,11 @@ bool find_map_indices(char **all_lines, int line_count, t_game *game)
 	return (false);
 }
 
-int find_max_width(char **all_lines, t_game *game)
+int	find_max_width(char **all_lines, t_game *game)
 {
-	int max_width;
-	int i;
-	int len;
+	int	max_width;
+	int	i;
+	int	len;
 
 	max_width = 0;
 	i = 0;
@@ -55,11 +58,11 @@ int find_max_width(char **all_lines, t_game *game)
 	return (max_width);
 }
 
-char *create_padded_line(char *src, int max_width)
+char	*create_padded_line(char *src, int max_width)
 {
-	char *padded_line;
-	int src_len;
-	int i;
+	char	*padded_line;
+	int		src_len;
+	int		i;
 
 	src_len = ft_strlen(src);
 	padded_line = (char *)malloc(sizeof(char) * (max_width + 1));
@@ -80,10 +83,10 @@ char *create_padded_line(char *src, int max_width)
 	return (padded_line);
 }
 
-char **create_map(char **all_lines, t_game *game)
+char	**create_map(char **all_lines, t_game *game)
 {
-	char **map;
-	int i;
+	char	**map;
+	int		i;
 
 	game->width = find_max_width(all_lines, game);
 	map = (char **)malloc(sizeof(char *) * (game->height + 1));
@@ -92,7 +95,8 @@ char **create_map(char **all_lines, t_game *game)
 	i = 0;
 	while (i < game->height)
 	{
-		map[i] = create_padded_line(all_lines[game->map_start_index + i], game->width);
+		map[i] = create_padded_line(all_lines[game->map_start_index + i],
+				game->width);
 		if (!map[i])
 		{
 			free_all_lines(map, i);
@@ -104,11 +108,11 @@ char **create_map(char **all_lines, t_game *game)
 	return (map);
 }
 
-bool find_player(t_game *game)
+bool	find_player(t_game *game)
 {
-	int i;
-	int j;
-	char c;
+	int		i;
+	int		j;
+	char	c;
 
 	i = 0;
 	while (i < game->height)

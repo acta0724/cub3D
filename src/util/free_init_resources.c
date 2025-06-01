@@ -1,11 +1,11 @@
 #include "../../include/cub3d.h"
 
-void free_init_resources(t_game *game)
+void	free_init_resources(t_game *game)
 {
-	int i;
+	int	i;
 
 	if (!game)
-		return;
+		return ;
 	i = 0;
 	if (game->north_texture)
 		free(game->north_texture);
