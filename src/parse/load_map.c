@@ -14,7 +14,6 @@ static bool	parse_map(t_game *game, const char *filename)
 {
 	char	**all_lines;
 	int		line_count;
-	bool	res;
 
 	init_game_data(game);
 	all_lines = read_all_lines(filename, &line_count);
