@@ -15,7 +15,7 @@
 # include <fcntl.h>
 # include <stdbool.h>
 
-# define KEY_ESC 53
+# define KEY_ESC 65307
 # define KEY_W 119
 # define KEY_A 97
 # define KEY_S 115

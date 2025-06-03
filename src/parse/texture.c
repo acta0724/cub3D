@@ -10,8 +10,22 @@ char	*skip_space(char *str)
 	return (&str[i]);
 }
 
+static bool	check_file_extension(const char *filename)
+{
+	char	*dot;
+
+	dot = ft_strrchr(filename, '.');
+	if (!dot || dot == filename)
+		return (false);
+	return (ft_strncmp(dot, ".xpm", 5) == 0);
+}
+
 static bool	assign_texture_path(t_game *game, char *line, char *path)
 {
+	if (!check_file_extension(path))
+		return (false);
+	if (open(path, O_RDONLY) < 0)
+		return (false);
 	if (ft_strncmp(line, "NO", 2) == 0)
 	{
 		if (game->north_texture)
