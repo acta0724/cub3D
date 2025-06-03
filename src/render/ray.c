@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/03 21:03:28 by kmoriyam          #+#    #+#             */
+/*   Updated: 2025/06/03 21:04:37 by kmoriyam         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
 void	perform_dda(t_game *game, t_ray *ray)
@@ -20,11 +32,11 @@ void	perform_dda(t_game *game, t_ray *ray)
 			ray->hit = 1;
 	}
 	if (ray->side == 0)
-		ray->perp_wall_dist = (ray->map_x - game->player->pos_x
-			+ (1 - ray->step_x) / 2) / ray->ray_dir_x;
+		ray->perp_wall_dist = (ray->map_x - game->player->pos_x + (1
+					- ray->step_x) / 2) / ray->ray_dir_x;
 	else
-		ray->perp_wall_dist = (ray->map_y - game->player->pos_y
-			+ (1 - ray->step_y) / 2) / ray->ray_dir_y;
+		ray->perp_wall_dist = (ray->map_y - game->player->pos_y + (1
+					- ray->step_y) / 2) / ray->ray_dir_y;
 }
 
 void	init_ray(t_game *game, t_ray *ray, int x)

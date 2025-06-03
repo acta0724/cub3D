@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/03 21:03:06 by kmoriyam          #+#    #+#             */
+/*   Updated: 2025/06/03 21:03:19 by kmoriyam         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
 void	put_pixel(t_img *img, int x, int y, int color)
@@ -30,8 +42,6 @@ void	draw_wall(t_game *game, t_ray *ray, int x)
 		ray->tex_y = (int)ray->tex_pos % game->img->height;
 		ray->tex_pos += ray->tex_step;
 		color = get_texture_color(tex_ptr, ray->tex_x, ray->tex_y, game);
-		// if (ray->side == 1)
-		// 	color = (color >> 1) & 0x7F7F7F;
 		put_pixel(game->screen, x, y, color);
 		y++;
 	}
