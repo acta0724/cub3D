@@ -1,10 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/03 21:00:52 by kmoriyam          #+#    #+#             */
+/*   Updated: 2025/06/03 21:01:01 by kmoriyam         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
 int	is_wall(t_game *game, double x, double y)
 {
-	// if (x < 0 || y < 0 || y >= game->height
-		// || x >= ft_strlen(game->map[(int)y]))
-	// 	return (1);
 	if (game->map[(int)y][(int)x] == WALL)
 		return (1);
 	return (0);
