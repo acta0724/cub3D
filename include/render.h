@@ -1,10 +1,13 @@
 #ifndef RENDER_H
-#define RENDER_H
+# define RENDER_H
 
-#include "types.h"
+# include "types.h"
 
 // init_render.c
 void	init_raycasting(t_game *game);
+
+// init_render_2.c
+void	set_initial_direction(t_game *game);
 
 // draw.c
 void	put_pixel(t_img *img, int x, int y, int color);

@@ -6,7 +6,7 @@
 /*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:03:01 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/03 21:03:02 by kmoriyam         ###   ########.fr       */
+/*   Updated: 2025/06/06 22:05:05 by kmoriyam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,49 +32,33 @@ static bool	check_file_extension(const char *filename)
 	return (ft_strncmp(dot, ".xpm", 5) == 0);
 }
 
+static bool	check_textures(t_game *game, char *line, char *path)
+{
+	char	**texture;
+
+	texture = NULL;
+	if (ft_strncmp(line, "NO", 2) == 0)
+		texture = &game->north_texture;
+	else if (ft_strncmp(line, "SO", 2) == 0)
+		texture = &game->south_texture;
+	else if (ft_strncmp(line, "WE", 2) == 0)
+		texture = &game->west_texture;
+	else if (ft_strncmp(line, "EA", 2) == 0)
+		texture = &game->east_texture;
+	if (!texture || *texture)
+		return (free(path), false);
+	*texture = path;
+	return (true);
+}
+
 static bool	assign_texture_path(t_game *game, char *line, char *path)
 {
 	if (!check_file_extension(path))
 		return (false);
 	if (open(path, O_RDONLY) < 0)
 		return (false);
-	if (ft_strncmp(line, "NO", 2) == 0)
-	{
-		if (game->north_texture)
-		{
-			return (false);
-		}
-		game->north_texture = path;
-	}
-	else if (ft_strncmp(line, "SO", 2) == 0)
-	{
-		if (game->south_texture)
-		{
-			return (false);
-		}
-		game->south_texture = path;
-	}
-	else if (ft_strncmp(line, "WE", 2) == 0)
-	{
-		if (game->west_texture)
-		{
-			return (false);
-		}
-		game->west_texture = path;
-	}
-	else if (ft_strncmp(line, "EA", 2) == 0)
-	{
-		if (game->east_texture)
-		{
-			return (false);
-		}
-		game->east_texture = path;
-	}
-	else
-	{
-		free(path);
+	if (!check_textures(game, line, path))
 		return (false);
-	}
 	return (true);
 }
 

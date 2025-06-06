@@ -6,7 +6,7 @@
 /*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:02:55 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/03 21:02:56 by kmoriyam         ###   ########.fr       */
+/*   Updated: 2025/06/06 21:09:24 by kmoriyam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,40 +15,29 @@
 bool	find_map_indices(char **all_lines, int line_count, t_game *game)
 {
 	int		i;
-	bool	map_started;
+	bool	started;
 
-	map_started = false;
-	i = 0;
-	while (i < line_count)
+	started = false;
+	i = -1;
+	while (++i < line_count)
 	{
 		if (all_lines[i][0] == '\0')
 		{
-			if (map_started && i < line_count - 1
-				&& is_map_line(all_lines[i + 1]))
+			if (started && i < line_count - 1 && is_map_line(all_lines[i + 1]))
 				return (false);
 		}
 		else if (is_map_line(all_lines[i]))
+			set_map_index(game, &started, i);
+		else if (has_map_info(all_lines, i))
 		{
-			if (game->map_start_index == -1)
-				game->map_start_index = i;
-			game->map_end_index = i;
-			map_started = true;
-		}
-		else if (!is_map_line(all_lines[i]) && (is_color_line(all_lines[i])
-				|| is_texture_line(all_lines[i])))
-		{
-			if (map_started)
+			if (started)
 				return (false);
 		}
 		else
 			return (false);
-		i++;
 	}
-	if (game->map_start_index != -1 && game->map_end_index != -1)
-	{
-		game->height = game->map_end_index - game->map_start_index + 1;
+	if (get_map_height(game))
 		return (true);
-	}
 	return (false);
 }
 
@@ -126,11 +115,11 @@ bool	find_player(t_game *game)
 	int		j;
 	char	c;
 
-	i = 0;
-	while (i < game->height)
+	i = -1;
+	while (++i < game->height)
 	{
-		j = 0;
-		while (j < game->width)
+		j = -1;
+		while (++j < game->width)
 		{
 			c = game->map[i][j];
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
@@ -141,9 +130,7 @@ bool	find_player(t_game *game)
 				game->player_y = i;
 				game->player_dir = c;
 			}
-			j++;
 		}
-		i++;
 	}
 	if (game->player_dir == '\0')
 		return (false);

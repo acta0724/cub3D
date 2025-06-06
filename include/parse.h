@@ -36,6 +36,11 @@ char	*create_padded_line(char *src, int max_width);
 char	**create_map(char **all_lines, t_game *game);
 bool	find_player(t_game *game);
 
+// map_builder_2.c
+void	set_map_index(t_game *game, bool *started, int i);
+bool	get_map_height(t_game *game);
+bool	has_map_info(char **all_lines, int i);
+
 // texture.c
 char	*skip_space(char *str);
 bool	parse_texture(t_game *game, char *line);
