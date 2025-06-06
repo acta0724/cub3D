@@ -6,7 +6,7 @@
 /*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:02:34 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/03 21:02:35 by kmoriyam         ###   ########.fr       */
+/*   Updated: 2025/06/06 20:32:46 by kmoriyam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	init_game_data(t_game *game)
 	game->player_dir = '\0';
 }
 
-static bool	parse_config_line(t_game *game, char *line, bool *textures_loaded,
-		bool *colors_loaded)
+static bool	parse_config_line(t_game *game, char *line, bool *tex_ready,
+		bool *col_ready)
 {
 	if (is_texture_line(line))
 	{
@@ -45,7 +45,7 @@ static bool	parse_config_line(t_game *game, char *line, bool *textures_loaded,
 		if (game->north_texture && game->south_texture && game->west_texture
 			&& game->east_texture)
 		{
-			*textures_loaded = true;
+			*tex_ready = true;
 		}
 	}
 	else if (is_color_line(line))
@@ -56,7 +56,7 @@ static bool	parse_config_line(t_game *game, char *line, bool *textures_loaded,
 			&& game->floor_color.b != -1 && game->ceiling_color.r != -1
 			&& game->ceiling_color.g != -1 && game->ceiling_color.b != -1)
 		{
-			*colors_loaded = true;
+			*col_ready = true;
 		}
 	}
 	return (true);
@@ -65,11 +65,11 @@ static bool	parse_config_line(t_game *game, char *line, bool *textures_loaded,
 bool	parse_config_lines(t_game *game, char **all_lines, int line_count)
 {
 	int		i;
-	bool	textures_loaded;
-	bool	colors_loaded;
+	bool	tex_ready;
+	bool	col_ready;
 
-	textures_loaded = false;
-	colors_loaded = false;
+	tex_ready = false;
+	col_ready = false;
 	i = 0;
 	while (i < line_count)
 	{
@@ -77,17 +77,16 @@ bool	parse_config_lines(t_game *game, char **all_lines, int line_count)
 			i++;
 		else if (is_map_line(all_lines[i]))
 		{
-			if (!textures_loaded || !colors_loaded)
+			if (!tex_ready || !col_ready)
 				return (false);
 			i++;
 		}
 		else
 		{
-			if (!parse_config_line(game, all_lines[i], &textures_loaded,
-					&colors_loaded))
+			if (!parse_config_line(game, all_lines[i], &tex_ready, &col_ready))
 				return (false);
 			i++;
 		}
 	}
-	return (textures_loaded && colors_loaded);
+	return (tex_ready && col_ready);
 }

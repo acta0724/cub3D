@@ -6,28 +6,38 @@
 /*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:02:40 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/03 21:02:41 by kmoriyam         ###   ########.fr       */
+/*   Updated: 2025/06/06 22:33:57 by kmoriyam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-char	**read_all_lines(const char *filename, int *line_count)
+void	assign_lines(int *line_count, char **new_lines, char *line,
+		char ***all_lines)
 {
-	int		fd;
-	char	*line;
-	char	**all_lines;
-	char	**new_lines;
-	int		i;
+	int	i;
 
-	*line_count = 0;
-	all_lines = NULL;
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
+	i = 0;
+	while (i < *line_count)
+	{
+		new_lines[i] = (*all_lines)[i];
+		i++;
+	}
+	new_lines[*line_count] = line;
+	new_lines[*line_count + 1] = NULL;
+	free(*all_lines);
+	*all_lines = new_lines;
+	(*line_count)++;
+}
+
+bool	read_lines(int *line_count, int *fd, char ***all_lines)
+{
+	char	*line;
+	char	**new_lines;
+
 	while (1)
 	{
-		line = get_next_line(fd);
+		line = get_next_line(*fd);
 		if (!line)
 			break ;
 		if (line[ft_strlen(line) - 1] == '\n')
@@ -36,22 +46,27 @@ char	**read_all_lines(const char *filename, int *line_count)
 		if (!new_lines)
 		{
 			free(line);
-			free_all_lines(all_lines, *line_count);
-			close(fd);
-			return (NULL);
+			free_all_lines(*all_lines, *line_count);
+			close(*fd);
+			return (false);
 		}
-		i = 0;
-		while (i < *line_count)
-		{
-			new_lines[i] = all_lines[i];
-			i++;
-		}
-		new_lines[*line_count] = line;
-		new_lines[*line_count + 1] = NULL;
-		free(all_lines);
-		all_lines = new_lines;
-		(*line_count)++;
+		assign_lines(line_count, new_lines, line, all_lines);
 	}
+	return (true);
+}
+
+char	**read_all_lines(const char *filename, int *line_count)
+{
+	int		fd;
+	char	**all_lines;
+
+	*line_count = 0;
+	all_lines = NULL;
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
+	if (!read_lines(line_count, &fd, &all_lines))
+		return (NULL);
 	close(fd);
 	return (all_lines);
 }

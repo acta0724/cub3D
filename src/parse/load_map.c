@@ -6,7 +6,7 @@
 /*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:02:52 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/03 21:02:53 by kmoriyam         ###   ########.fr       */
+/*   Updated: 2025/06/06 22:06:20 by kmoriyam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,8 @@ static bool	parse_map(t_game *game, const char *filename)
 
 	init_game_data(game);
 	all_lines = read_all_lines(filename, &line_count);
-	if (!all_lines || line_count == 0)
-	{
-		free_all_lines(all_lines, line_count);
-		return (false);
-	}
-	if (!parse_config_lines(game, all_lines, line_count))
-	{
-		free_all_lines(all_lines, line_count);
-		return (false);
-	}
-	if (!find_map_indices(all_lines, line_count, game))
+	if ((!all_lines || line_count == 0) || !parse_config_lines(game, all_lines,
+			line_count) || !find_map_indices(all_lines, line_count, game))
 	{
 		free_all_lines(all_lines, line_count);
 		return (false);
@@ -85,11 +76,13 @@ void	load_map(t_game *game, const char *filename)
 	if (!parse_map(game, filename))
 	{
 		free_init_resources(game);
+		write(1, "A\n", 2);
 		error_exit(ERR_MAP);
 	}
 	if (!validate_map(game))
 	{
 		free_init_resources(game);
+		write(1, "B\n", 2);
 		error_exit(ERR_MAP);
 	}
 }

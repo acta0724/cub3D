@@ -6,43 +6,11 @@
 /*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:03:23 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/03 21:03:24 by kmoriyam         ###   ########.fr       */
+/*   Updated: 2025/06/06 21:14:11 by kmoriyam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-static void	set_initial_direction(t_game *game)
-{
-	if (game->player_dir == NORTH)
-	{
-		game->player->dir_x = 0;
-		game->player->dir_y = -1;
-		game->player->plane_x = 0.66;
-		game->player->plane_y = 0;
-	}
-	else if (game->player_dir == SOUTH)
-	{
-		game->player->dir_x = 0;
-		game->player->dir_y = 1;
-		game->player->plane_x = -0.66;
-		game->player->plane_y = 0;
-	}
-	else if (game->player_dir == EAST)
-	{
-		game->player->dir_x = 1;
-		game->player->dir_y = 0;
-		game->player->plane_x = 0;
-		game->player->plane_y = 0.66;
-	}
-	else if (game->player_dir == WEST)
-	{
-		game->player->dir_x = -1;
-		game->player->dir_y = 0;
-		game->player->plane_x = 0;
-		game->player->plane_y = -0.66;
-	}
-}
 
 static void	init_player(t_game *game)
 {
