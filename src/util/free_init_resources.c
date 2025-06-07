@@ -6,7 +6,7 @@
 /*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:03:47 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/03 21:03:48 by kmoriyam         ###   ########.fr       */
+/*   Updated: 2025/06/07 15:28:29 by kmoriyam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	free_init_resources(t_game *game)
 		{
 			if (game->map[i])
 				free(game->map[i]);
+			game->map[i] = NULL;
 			i++;
 		}
 		free(game->map);

@@ -6,7 +6,7 @@
 /*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:02:52 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/06 22:06:20 by kmoriyam         ###   ########.fr       */
+/*   Updated: 2025/06/07 15:25:18 by kmoriyam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static bool	parse_map(t_game *game, const char *filename)
 	free_all_lines(all_lines, line_count);
 	if (!find_player(game))
 	{
-		free_all_lines(game->map, game->height);
+		// free_all_lines(game->map, game->height);
 		return (false);
 	}
 	return (true);
@@ -76,13 +76,11 @@ void	load_map(t_game *game, const char *filename)
 	if (!parse_map(game, filename))
 	{
 		free_init_resources(game);
-		write(1, "A\n", 2);
 		error_exit(ERR_MAP);
 	}
 	if (!validate_map(game))
 	{
 		free_init_resources(game);
-		write(1, "B\n", 2);
 		error_exit(ERR_MAP);
 	}
 }

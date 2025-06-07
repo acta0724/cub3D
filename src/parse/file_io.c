@@ -6,7 +6,7 @@
 /*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:02:40 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/06 22:33:57 by kmoriyam         ###   ########.fr       */
+/*   Updated: 2025/06/07 15:11:35 by kmoriyam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,11 @@ void	free_all_lines(char **all_lines, int line_count)
 	i = 0;
 	while (i < line_count)
 	{
-		free(all_lines[i]);
+		if (all_lines[i])
+		{
+			free(all_lines[i]);
+			all_lines[i] = NULL;
+		}
 		i++;
 	}
 	free(all_lines);
