@@ -6,7 +6,7 @@
 /*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:02:40 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/07 15:11:35 by kmoriyam         ###   ########.fr       */
+/*   Updated: 2025/06/07 15:32:43 by kmoriyam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ void	assign_lines(int *line_count, char **new_lines, char *line,
 	(*line_count)++;
 }
 
-bool	read_lines(int *line_count, int *fd, char ***all_lines)
+bool	read_lines(int *line_count, int fd, char ***all_lines)
 {
 	char	*line;
 	char	**new_lines;
 
 	while (1)
 	{
-		line = get_next_line(*fd);
+		line = get_next_line(fd);
 		if (!line)
 			break ;
 		if (line[ft_strlen(line) - 1] == '\n')
@@ -47,7 +47,7 @@ bool	read_lines(int *line_count, int *fd, char ***all_lines)
 		{
 			free(line);
 			free_all_lines(*all_lines, *line_count);
-			close(*fd);
+			close(fd);
 			return (false);
 		}
 		assign_lines(line_count, new_lines, line, all_lines);
@@ -65,7 +65,7 @@ char	**read_all_lines(const char *filename, int *line_count)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
-	if (!read_lines(line_count, &fd, &all_lines))
+	if (!read_lines(line_count, fd, &all_lines))
 		return (NULL);
 	close(fd);
 	return (all_lines);

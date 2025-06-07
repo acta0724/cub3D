@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kiwasa <kiwasa@student.42.jp>              +#+  +:+       +#+        */
+/*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:03:01 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/07 14:36:19 by kiwasa           ###   ########.fr       */
+/*   Updated: 2025/06/07 15:35:08 by kmoriyam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,14 @@ static bool	check_textures(t_game *game, char *line, char *path)
 
 static bool	assign_texture_path(t_game *game, char *line, char *path)
 {
+	int	fd;
+
 	if (!check_file_extension(path))
 		return (false);
-	if (open(path, O_RDONLY) < 0)
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
 		return (false);
+	close(fd);
 	if (!check_textures(game, line, path))
 		return (false);
 	return (true);
