@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_builder_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kiwasa <kiwasa@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 21:09:26 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/06 21:09:34 by kmoriyam         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:36:37 by kiwasa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	set_map_index(t_game *game, bool *started, int i)
 
 bool	get_map_height(t_game *game)
 {
-	if (game->map_start_index != -1 && game->map_end_index != -1)
+	if (game->map_start_index != -1)
 	{
 		game->height = game->map_end_index - game->map_start_index + 1;
 		return (true);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kiwasa <kiwasa@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:03:28 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/03 21:04:37 by kmoriyam         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:34:14 by kiwasa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ void	init_ray(t_game *game, t_ray *ray, int x)
 	ray->map_x = (int)game->player->pos_x;
 	ray->map_y = (int)game->player->pos_y;
 	if (ray->ray_dir_x == 0)
-		ray->delta_dist_x = 1e30;
+		ray->delta_dist_x = INFINITY;
 	else
 		ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
 	if (ray->ray_dir_y == 0)
-		ray->delta_dist_y = 1e30;
+		ray->delta_dist_y = INFINITY;
 	else
 		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 	ray->hit = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kiwasa <kiwasa@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:03:01 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/06 22:05:05 by kmoriyam         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:36:19 by kiwasa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ static bool	check_textures(t_game *game, char *line, char *path)
 	char	**texture;
 
 	texture = NULL;
-	if (ft_strncmp(line, "NO", 2) == 0)
+	if (ft_strncmp(line, "NO ", 3) == 0)
 		texture = &game->north_texture;
-	else if (ft_strncmp(line, "SO", 2) == 0)
+	else if (ft_strncmp(line, "SO ", 3) == 0)
 		texture = &game->south_texture;
-	else if (ft_strncmp(line, "WE", 2) == 0)
+	else if (ft_strncmp(line, "WE ", 3) == 0)
 		texture = &game->west_texture;
-	else if (ft_strncmp(line, "EA", 2) == 0)
+	else if (ft_strncmp(line, "EA ", 3) == 0)
 		texture = &game->east_texture;
 	if (!texture || *texture)
 		return (free(path), false);

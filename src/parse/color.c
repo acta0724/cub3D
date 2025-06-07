@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kiwasa <kiwasa@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:02:29 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/03 21:02:30 by kmoriyam         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:37:29 by kiwasa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ bool	parse_color(t_game *game, char *line)
 
 	if (!line)
 		return (false);
-	color_str = skip_space(line + 1);
+	color_str = skip_space(line + 2);
 	if (*color_str == '\0')
 		return (false);
 	rgb = ft_split(color_str, ',');

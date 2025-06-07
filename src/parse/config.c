@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kiwasa <kiwasa@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:02:34 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/06 20:32:46 by kmoriyam         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:37:04 by kiwasa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static bool	parse_config_line(t_game *game, char *line, bool *tex_ready,
 			*col_ready = true;
 		}
 	}
+	else
+		return (false);
 	return (true);
 }
 

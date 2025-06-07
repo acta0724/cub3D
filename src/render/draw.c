@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kiwasa <kiwasa@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:03:06 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/03 21:03:19 by kmoriyam         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:35:21 by kiwasa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	draw_wall(t_game *game, t_ray *ray, int x)
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
-		ray->tex_y = (int)ray->tex_pos % game->img->height;
+		ray->tex_y = (int)ray->tex_pos;
 		ray->tex_pos += ray->tex_step;
 		color = get_texture_color(tex_ptr, ray->tex_x, ray->tex_y, game);
 		put_pixel(game->screen, x, y, color);

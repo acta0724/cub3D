@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   classification.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kiwasa <kiwasa@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:02:15 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/03 21:02:16 by kmoriyam         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:37:51 by kiwasa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	is_map_line(const char *line)
 	int		i;
 	bool	has_map_char;
 
-	if (!line || line[0] == '\n' || line[0] == '\0')
+	if (!line || line[0] == '\0')
 		return (false);
 	i = 0;
 	has_map_char = false;

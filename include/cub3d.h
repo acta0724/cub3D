@@ -13,6 +13,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <math.h>
 # include <stdbool.h>
 
 # define KEY_ESC 65307
