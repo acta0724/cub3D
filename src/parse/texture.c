@@ -6,7 +6,7 @@
 /*   By: kmoriyam <kmoriyam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:03:01 by kmoriyam          #+#    #+#             */
-/*   Updated: 2025/06/07 15:35:08 by kmoriyam         ###   ########.fr       */
+/*   Updated: 2025/06/07 15:40:53 by kmoriyam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static bool	check_textures(t_game *game, char *line, char *path)
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 		texture = &game->east_texture;
 	if (!texture || *texture)
-		return (free(path), false);
+		return (false);
 	*texture = path;
 	return (true);
 }
